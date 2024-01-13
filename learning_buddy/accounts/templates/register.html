@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create user</title>
+</head>
+<body>
+    <form action="{% url 'accounts:create_user' %}" method="POST">
+        {% csrf_token %}
+        <label for="first_name">First name:</label><br>
+        <input type="text" id="first_name" name="first_name"><br>
+        <label for="last_name">Last name:</label><br>
+        <input type="text" id="last_name" name="last_name"><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email"><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password"><br>
+        <input type="submit" value="create">
+    </form>
+</body>
+</html>
