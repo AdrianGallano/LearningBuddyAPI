@@ -10,7 +10,7 @@ class Room(models.Model):
     )
 
     def __str__(self):
-        return str(self.id)
+        return f"{str(self.id)} - {self.user.first_name} {self.user.last_name}"
 
 
 class Subject(models.Model):

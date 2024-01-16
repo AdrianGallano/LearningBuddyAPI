@@ -8,7 +8,7 @@ class Room(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="quizzes_room")
 
     def __str__(self):
-        return str(self.id)
+        return f"{str(self.id)} - {self.user.first_name} {self.user.last_name}"
 
 
 class Subject(models.Model):
