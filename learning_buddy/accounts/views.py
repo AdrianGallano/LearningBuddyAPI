@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse, Http404, HttpResponseBadRequest
+from django.urls import reverse
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
 from .forms import UserForm
 
 g_user = None
@@ -7,7 +8,7 @@ g_user = None
 
 def profile(request):
     if g_user == None:
-        return HttpResponse("please login")
+        return HttpResponse(f"please <a href='{reverse('accounts:login')}'>log in</a>")
 
     context = {"user": g_user}
 
@@ -21,7 +22,7 @@ def register(request):
         if form.is_valid():
             form.save()
 
-            return render(request, "registration_successful.html", {})
+            return HttpResponseRedirect(reverse("accounts:registration_successful"))
         else:
             return HttpResponseBadRequest("Bad Request")
 
@@ -31,3 +32,6 @@ def register(request):
 
 def login(request):
     return render(request, "login.html", {})
+
+def registration_successful(request):
+    return render(request, "registration_successful.html", {})
