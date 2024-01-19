@@ -1,16 +1,22 @@
 from django.shortcuts import render
 from django.urls import reverse
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
+from django.http import (
+    HttpResponse,
+    HttpResponseRedirect,
+    HttpResponseBadRequest,
+    HttpResponseNotAllowed,
+)
 from .forms import UserForm
-
-g_user = None
-
+from django.contrib.auth.models import AnonymousUser
+from flashcards.models import Room as fRoom
+from reviews.models import Room as rRoom
+from quizzes.models import Room as qRoom
 
 def profile(request):
-    if g_user == None:
-        return HttpResponse(f"please <a href='{reverse('accounts:login')}'>log in</a>")
+    if request.user is AnonymousUser:
+        raise HttpResponseNotAllowed
 
-    context = {"user": g_user}
+    context = {"user": request.user}
 
     return render(request, "profile.html", context)
 
@@ -32,6 +38,7 @@ def register(request):
 
 def login(request):
     return render(request, "login.html", {})
+
 
 def registration_successful(request):
     return render(request, "registration_successful.html", {})

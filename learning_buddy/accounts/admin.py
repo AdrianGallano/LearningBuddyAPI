@@ -1,17 +1,8 @@
 from django.contrib import admin
-from django.contrib.auth.models import User as AuthUser
 from .models import User
 from django.contrib.auth.admin import UserAdmin
 
-admin.site.unregister(AuthUser)
-
-
 @admin.register(User)
-class UserAccountsAdmin(admin.ModelAdmin):
-    list_display = ["first_name", "last_name", "email"]
-    search_fields = ["email__startswith"]
-
-@admin.register(AuthUser)
 class NewUser(UserAdmin):
     readonly_fields = [
         "date_joined",

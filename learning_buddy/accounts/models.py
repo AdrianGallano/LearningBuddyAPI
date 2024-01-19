@@ -1,12 +1,10 @@
 from django.db import models
-import uuid
+from django.contrib.auth.models import AbstractUser
 
-class User(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    email = models.EmailField(max_length=100, unique=True, help_text="enter a new email address")
-    password = models.CharField(max_length=100)
+
+class User(AbstractUser):
+    username = models.CharField(default="NoName", max_length=32, unique=True)
+    email = models.EmailField(blank=False, unique=True, max_length=100)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{str(self.pk)} - {self.username}"
