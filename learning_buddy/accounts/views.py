@@ -15,9 +15,10 @@ def profile(request):
     if request.user.is_anonymous:
         raise HttpResponseNotAllowed
 
-    context = {"user": request.user}
+    context = {"user": request.user }
 
-    return render(request, "profile.html", context)
+
+    return render(request, "accounts/profile.html", context)
 
 
 def register(request):
@@ -43,7 +44,7 @@ def register(request):
             return HttpResponseBadRequest("Bad Request")
 
     form = UserForm()
-    return render(request, "register.html", {"form": form})
+    return render(request, "accounts/register.html", {"form": form})
 
 
 def user_login(request):
@@ -59,7 +60,7 @@ def user_login(request):
             return HttpResponseRedirect(reverse("accounts:registration_successful"))
 
     form = LoginForm()
-    return render(request, "login.html", {"form": form})
+    return render(request, "accounts/login.html", {"form": form})
 
 def user_logout(request):
     logout(request)
@@ -67,4 +68,4 @@ def user_logout(request):
 
 
 def registration_successful(request):
-    return render(request, "registration_successful.html", {})
+    return render(request, "accounts/registration_successful.html", {})

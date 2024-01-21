@@ -1,0 +1,12 @@
+{% extends 'main/base.html' %} 
+{% block title %} Profile {% endblock %} 
+{% block header%} {% endblock %} 
+
+{% block content %}
+
+    Profile:
+    {% for v in user.values %}
+    <p>{{ v }}</p>
+    {% endfor %}
+
+{% endblock %} 
