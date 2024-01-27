@@ -1,13 +1,21 @@
 {% extends 'main/base.html' %} 
 {% block title %} Register {% endblock %} 
-{% block header%} {% endblock %} 
+{% block header %} {% endblock %} 
 
 {% block content %}
     <form action="{% url 'accounts:register' %}" method="POST">
         {% csrf_token %}
-        <ul>
-            {{ form.as_p }}
-        </ul>
+            {% for field in form %}
+                <p>
+                    {{ field.label_tag }}<br>
+                    {{ field }}
+                    {% if field.errors %}
+                        {% for error in field.errors %}
+                            <p>{{ error}}</p>
+                        {% endfor %}
+                    {% endif %}
+                </p>
+            {% endfor %}
         <input type="submit" value="create">
     </form>
 {% endblock %} 

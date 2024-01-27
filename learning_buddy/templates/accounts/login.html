@@ -6,10 +6,24 @@
 {% endblock %}
 {% block content %}
 <div class="container">
-    <form action="{% url 'accounts:login' %}" method="POST">
-        {% csrf_token %} 
-        {{ form.as_p }}
-        <input type="submit" value="login" />
-    </form>
+    <div class="form-container">
+        <h3>Log-in</h3>
+        <form action="{% url 'accounts:login' %}" method="POST">
+            {% csrf_token %} 
+            {% for field in form %}
+            <p class="field-container">
+                {{field.label_tag | cut:":"}}
+                {{ field }}
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        <p>{{error}}</p>
+                    {% endfor %}
+                {% endif %}
+            </p>
+            {% endfor %}
+            <p id="login-prompt">don't have any account? register <a href="{% url 'accounts:register' %}">here</a>.</p>
+            <input type="submit" value="Login" class="login_button" />
+        </form>
+    </div>
 </div>
 {% endblock %}
