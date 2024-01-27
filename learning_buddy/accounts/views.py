@@ -2,70 +2,59 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.http import (
     HttpResponseRedirect,
-    HttpResponseBadRequest,
-    HttpResponseNotAllowed,
+    HttpResponsePermanentRedirect,
     HttpResponse,
 )
-from .forms import UserForm, LoginForm
-from django.contrib.auth import login, authenticate, logout
+from .forms import RegisterForm, LoginForm
+from django.contrib.auth import login, logout
+from django.views.generic import View
+from django.contrib.auth.decorators import login_required
 from .models import User
 
-
+@login_required
 def profile(request):
-    if request.user.is_anonymous:
-        raise HttpResponseNotAllowed
-
-    context = {"user": request.user }
-
-
+    context = {"user": request.user}
+    
     return render(request, "accounts/profile.html", context)
 
+class RegisterView(View):
+    def get(self, request):
+        form = RegisterForm()
+        context = {"form": form}
+        return render(request, "accounts/register.html", context)
 
-def register(request):
-    if request.method == "POST":
-        form = UserForm(request.POST)
+    def post(self, request):
+        form = RegisterForm(request.POST)
         if form.is_valid():
-            username = request.POST["username"]
-            first_name = request.POST["first_name"]
-            last_name = request.POST["last_name"]
-            email = request.POST["email"]
-            password = request.POST["password"]
-
-            User.objects.create_user(
-                username=username,
-                first_name=first_name,
-                last_name=last_name,
-                email=email,
-                password=password,
-            )
-
-            return HttpResponseRedirect(reverse("accounts:login"))
-        else:
-            return HttpResponseBadRequest("Bad Request")
-
-    form = UserForm()
-    return render(request, "accounts/register.html", {"form": form})
-
-
-def user_login(request):
-    if request.method == "POST":
-        username = request.POST["username"]
-        password = request.POST["password"]
-
-        user = authenticate(request, username=username, password=password)
-        print(user)
-
-        if user is not None:
-            login(request, user)
+            form.save()
             return HttpResponseRedirect(reverse("accounts:registration_successful"))
+        else:
+            return render(request, "accounts/register.html", {"form":form})
 
-    form = LoginForm()
-    return render(request, "accounts/login.html", {"form": form})
 
+class LoginView(View):
+
+    def get(self, request):
+        if request.user.is_authenticated:
+            return HttpResponsePermanentRedirect(reverse("accounts:profile"))
+
+        form = LoginForm()
+        return render(request, "accounts/login.html", {"form": form})
+
+    def post(self, request):
+        form = LoginForm(request.POST)
+        print(form.is_valid())
+        if form.is_valid():
+            user  = User.objects.get(username=request.POST["username"])
+            login(request, user)
+            return HttpResponseRedirect(reverse("accounts:profile"))
+
+        return render(request, "accounts/login.html", {"form": form})
+
+@login_required
 def user_logout(request):
     logout(request)
     return HttpResponse("logout successful")
-
 
 def registration_successful(request):
     return render(request, "accounts/registration_successful.html", {})
