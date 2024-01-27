@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import Group
 
 @admin.register(User)
-class NewUser(UserAdmin):
+class NewUserAdmin(UserAdmin):
     readonly_fields = [
         "date_joined",
     ]
@@ -20,7 +20,3 @@ class NewUser(UserAdmin):
 
 
         return form
-
-""" if request.user.is_staff:
-    group = Group.objects.get(name="StaffGroup")
-    request.user.groups.set(group) """
