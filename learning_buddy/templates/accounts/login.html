@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %} Login {% endblock %}
 {% block header %}
+<link rel="stylesheet" href="{% static 'main/general_form.css' %}">
 <link rel="stylesheet" href="{% static 'accounts/login.css' %}">
 {% endblock %}
 {% block content %}
@@ -16,13 +17,13 @@
                 {{ field }}
                 {% if field.errors %}
                     {% for error in field.errors %}
-                        <p>{{error}}</p>
+                        <p class="error">{{error}}</p>
                     {% endfor %}
                 {% endif %}
             </p>
             {% endfor %}
             <p id="login-prompt">don't have any account? register <a href="{% url 'accounts:register' %}">here</a>.</p>
-            <input type="submit" value="Login" class="login_button" />
+            <input type="submit" value="Login" class="form-btn" />
         </form>
     </div>
 </div>

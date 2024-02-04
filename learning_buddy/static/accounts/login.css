@@ -6,51 +6,6 @@
     --light-green: #A0F2A5;
 }
 
-.container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-/*     display: flex;
-    background-color: var(--dark-blue);
-    padding: 2rem;
-    border-radius: 2px;
-    box-shadow: 1px 1px 10px var(--black); */
-
-.form-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: auto;
-    font-size: 1rem;
-    padding: 2rem;
-    border-radius: 2px;
-    background-color: #1C1C26;
-}
-
-
-.form-container > form{
-    display: flex;
-    flex-direction: column;
-}
-
-.field-container{
-    display: flex;
-    flex-direction: column;
-}
-
-.login_button{
-    padding: .5rem .8rem;
-    align-self: flex-end;
-    background-color: var(--light-green);
-    color: var(--dark-blue);
-    border: none;
-}
-
 .login_field{
     outline: none;
     padding: 1rem .5rem;
@@ -60,17 +15,6 @@
     background-color: var(--black);
     border: none;
     margin-bottom: 2rem;
-}
-
-label{
-    margin-bottom: 1rem;
-    font-weight: 700;
-    opacity: 80%
-}
-
-p:nth-child(4){
-    background-color: red;
-    padding: 1rem;
 }
 
 #login-prompt{
