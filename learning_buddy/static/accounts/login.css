@@ -6,16 +6,6 @@
     --light-green: #A0F2A5;
 }
 
-.login_field{
-    outline: none;
-    padding: 1rem .5rem;
-    width: 50ch;
-    font-size: 1rem;
-    color: var(--white);
-    background-color: var(--black);
-    border: none;
-    margin-bottom: 2rem;
-}
 
 #login-prompt{
     background-color: transparent;

@@ -11,7 +11,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    padding-block: 2rem;
 }
 
 .form-container{
@@ -42,6 +43,17 @@ label{
     opacity: 80%
 }
 
+input{
+    outline: none;
+    padding: 1rem .5rem;
+    width: 50ch;
+    font-size: 1rem;
+    color: var(--white);
+    background-color: var(--black);
+    border: none;
+    margin-bottom: 2rem;
+}
+
 .error{
     background-color: red;
     padding: 1rem;
@@ -54,3 +66,4 @@ label{
     color: var(--dark-blue);
     border: none;
 }
+

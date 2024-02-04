@@ -43,7 +43,6 @@ class LoginView(View):
 
     def post(self, request):
         form = LoginForm(request.POST)
-        print(form.is_valid())
         if form.is_valid():
             user  = User.objects.get(username=request.POST["username"])
             login(request, user)
