@@ -15,6 +15,15 @@ class RegisterForm(UserCreationForm):
             "password1",
             "password2",
         ]
+        widgets = {
+            "username": forms.TextInput(attrs={"placeholder":"Username"}),
+            "first_name": forms.TextInput(attrs={"placeholder":"First name"}),
+            "last_name": forms.TextInput(attrs={"placeholder":"Last name"}),
+            "email": forms.EmailInput(attrs={"placeholder":"Email"}),
+            
+
+        }
+        
 
 
 class LoginForm(forms.ModelForm):
@@ -32,6 +41,6 @@ class LoginForm(forms.ModelForm):
         model = User
         fields = ["username", "password"]
         widgets = {
-            "username": forms.TextInput(attrs={"class":"login_field", "placeholder":"Username"}),
-            "password": forms.PasswordInput(attrs={"minlength":"8", "class":"login_field", "placeholder":"Password" })
+            "username": forms.TextInput(attrs={"class":"input input-bordered text-black", "placeholder":"Username"}),
+            "password": forms.PasswordInput(attrs={"minlength":"8", "class":"input input-bordered text-black", "placeholder":"Password" })
         }

@@ -6,9 +6,3 @@
     --light-green: #A0F2A5;
     
 }
-
-body{
-    color: var(--white) !important;
-    background-color: var(--black);
-}
-

@@ -1,31 +1,62 @@
-{% extends 'main/base.html' %} 
+{% extends 'main/base.html' %}
 {% load static %}
-{% block title %} Register {% endblock %} 
+{% block title %}
+Learning buddy | Register
+{% endblock %}
 {% block header %}
-<link rel="stylesheet" href="{% static 'main/general_form.css' %}">
-<link rel="stylesheet" href="{% static 'accounts/register.css' %}">
-{% endblock %} 
+  <link rel="stylesheet" href="{% static 'main/general_form.css' %}" />
+{% endblock %}
 
 {% block content %}
-    
-    <div class="container">
-        <div class="form-container">
-            <h3>Register</h3>
-            <form action="{% url 'accounts:register' %}" method="POST">
-                {% csrf_token %}
-                    {% for field in form %}
-                        <p>
-                            {{ field.label_tag }}<br>
-                            {{ field }}
-                            {% if field.errors %}
-                                {% for error in field.errors %}
-                                    <p>{{ error}}</p>
-                                {% endfor %}
-                            {% endif %}
-                        </p>
-                    {% endfor %}
-                <input type="submit" value="create" class="form-btn">
-            </form>
+
+  <div class="relative flex flex-col justify-center md:py-6 overflow-hidden">
+
+    <div class="w-full p-6 m-auto bg-white rounded-md shadow-md lg:max-w-xl">
+
+      <form action="{% url 'accounts:register' %}" method="POST" class="card-body dark-text">
+
+        <h1 class="text-3xl font-semibold text-center text-gray-700">Register</h1>
+
+        {% csrf_token %}
+
+        {% for field in form %}
+
+          <div class="form-control">
+
+            {% if field.name == "password2" %}
+            <label for="{{ field.id_for_label }}" class="label"><span class="label-text">Password confirmation</span></label>
+            {% else %}
+            <label for="{{ field.id_for_label }}" class="label"><span class="label-text">{{ field.name | capfirst | cut:"_" | cut:"1"}}</span></label>
+            {% endif%}
+            
+            {{ field }}
+            <p>{{ field.help_text }}</p>
+            {% if field.errors %}
+
+              <div class="error-container">
+
+                {% for error in field.errors %}
+
+                  <p class="error">{{ error }}</p>
+
+                {% endfor %}
+
+              </div>
+
+            {% endif %}
+
+          </div>
+
+        {% endfor %}
+        <p class="text-black">
+          already have an account? <a href="{% url 'accounts:login' %}" class="text-blue-600 hover:text-blue-800 hover:underline">Sign in here.</a>
+        </p>
+        <div class="form-control mt-6">
+          <button class="md:btn-md lg:btn-lg btn btn-primary text-light-600">Register</button>
         </div>
+      </form>
+
     </div>
-{% endblock %} 
+
+  </div>
+{% endblock %}
