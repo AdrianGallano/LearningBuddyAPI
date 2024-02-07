@@ -25,4 +25,5 @@ urlpatterns = [
     path("reviews/", include("reviews.urls")),
     path("flashcards/", include("flashcards.urls")),
     path("quizzes/", include("quizzes.urls")),
+    path("dashboard/", include("dashboard.urls")),
 ]

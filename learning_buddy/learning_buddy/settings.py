@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'reviews',
     'flashcards',
     'quizzes',
+    'dashboard',
 ]
 
 MIDDLEWARE = [

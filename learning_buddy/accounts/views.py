@@ -33,6 +33,9 @@ def create_user_rooms(user):
 
 class RegisterView(View):
     def get(self, request):
+        if request.user.is_authenticated:
+            return HttpResponsePermanentRedirect(reverse("accounts:profile"))
+        
         form = RegisterForm()
         context = {"form": form}
         return render(request, "accounts/register.html", context)
