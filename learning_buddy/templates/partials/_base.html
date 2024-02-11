@@ -1,0 +1,23 @@
+{% load static %}
+{% load compress %}
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning buddy | {% block title %}Home{% endblock %}</title>
+    <link rel="icon" href="{% static 'image/logo-dark.png' %}">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
+    {% compress css %}
+    <link rel="stylesheet" href="{% static 'src/output.css' %}">
+    {% endcompress %}
+    {% block head %}
+    {% endblock %}
+</head>
+<body class="bg-green-50 dark:bg-gray-900">
+    {% block content %}
+    {% endblock content %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+</body>
+</html>

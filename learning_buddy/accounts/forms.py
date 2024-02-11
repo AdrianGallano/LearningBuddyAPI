@@ -5,6 +5,13 @@ from .models import User
 
 
 class RegisterForm(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['password1'].widget.attrs['class'] ="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        self.fields['password2'].widget.attrs['class'] = "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        self.fields['password1'].widget.attrs['placeholder'] ="••••••••"
+        self.fields['password2'].widget.attrs['placeholder'] = "••••••••"
+
     class Meta:
         model = User
         fields = [
@@ -16,14 +23,11 @@ class RegisterForm(UserCreationForm):
             "password2",
         ]
         widgets = {
-            "username": forms.TextInput(attrs={"placeholder":"Username"}),
-            "first_name": forms.TextInput(attrs={"placeholder":"First name"}),
-            "last_name": forms.TextInput(attrs={"placeholder":"Last name"}),
-            "email": forms.EmailInput(attrs={"placeholder":"Email"}),
-            
-
+            "username": forms.TextInput(attrs={"placeholder":"e.g. DarkMegatron420","class":"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"}),
+            "first_name": forms.TextInput(attrs={"placeholder":"e.g. Adrian","class":"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"}),
+            "last_name": forms.TextInput(attrs={"placeholder":"e.g. Gallano","class":"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"}),
+            "email": forms.EmailInput(attrs={"placeholder":"name@company.com","class":"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"}),
         }
-        
 
 
 class LoginForm(forms.ModelForm):
@@ -41,6 +45,6 @@ class LoginForm(forms.ModelForm):
         model = User
         fields = ["username", "password"]
         widgets = {
-            "username": forms.TextInput(attrs={"class":"input input-bordered text-black", "placeholder":"Username"}),
-            "password": forms.PasswordInput(attrs={"minlength":"8", "class":"input input-bordered text-black", "placeholder":"Password" })
+            "username": forms.TextInput(attrs={"class":"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", "placeholder":"username"}),
+            "password": forms.PasswordInput(attrs={"minlength":"8", "class":"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", "placeholder":"••••••••" })
         }

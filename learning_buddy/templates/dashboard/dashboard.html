@@ -1,12 +1,16 @@
-{% extends "main/base.html" %}
-{% block title %}
-{% endblock %}
+{% extends "partials/_base.html" %}
+{% load static %}
+{% block title %} Dashboard {% endblock %}
 
 {% block head %}
-
+<link rel="stylesheet" href="{% static 'dashboard/dashboard.css' %}">
 {% endblock %}
 
 {% block content %}
-
-
+   {% include 'partials/_learn_navbar.html' with username=user.username email=user.email %}
+   <div class="p-4 sm:ml-64">
+      <div class="pt-16 p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+         
+      </div>
+   </div>
 {% endblock %}
