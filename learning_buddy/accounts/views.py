@@ -34,7 +34,7 @@ def create_user_rooms(user):
 class RegisterView(View):
     def get(self, request):
         if request.user.is_authenticated:
-            return HttpResponsePermanentRedirect(reverse("accounts:profile"))
+            return HttpResponsePermanentRedirect(reverse("dashboard_app:dashboard"))
         
         form = RegisterForm()
         context = {"form": form}
@@ -58,7 +58,7 @@ class LoginView(View):
 
     def get(self, request):
         if request.user.is_authenticated:
-            return HttpResponsePermanentRedirect(reverse("accounts:profile"))
+            return HttpResponsePermanentRedirect(reverse("dashboard_app:dashboard"))
 
         form = LoginForm()
         return render(request, "accounts/login.html", {"form": form})
@@ -68,7 +68,7 @@ class LoginView(View):
         if form.is_valid():
             user  = User.objects.get(username=request.POST["username"])
             login(request, user)
-            return HttpResponseRedirect(reverse("accounts:profile"))
+            return HttpResponseRedirect(reverse("dashboard_app:dashboard"))
 
         return render(request, "accounts/login.html", {"form": form})
 
