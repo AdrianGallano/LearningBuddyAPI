@@ -75,7 +75,10 @@ class LoginView(View):
 @login_required
 def user_logout(request):
     logout(request)
-    return HttpResponse("logout successful")
+    return HttpResponsePermanentRedirect(reverse("accounts:login"))
 
 def registration_successful(request):
+    if request.user.is_authenticated:
+        return HttpResponsePermanentRedirect(reverse("dashboard_app:dashboard"))
+    
     return render(request, "accounts/registration_successful.html", {})
