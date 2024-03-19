@@ -17,7 +17,9 @@ class Subject(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
     name = models.CharField(max_length=100)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
-
+    date_time_created = models.DateTimeField(auto_now_add=True)
+    date_time_modified = models.DateTimeField(auto_now=True)
+    
     def __str__(self):
         return self.name
 

@@ -7,10 +7,12 @@
 {% endblock %}
 
 {% block content %}
-   {% include 'partials/_learn_navbar.html' with username=user.username email=user.email %}
-   <div class="p-4 sm:ml-64">
-      <div class="pt-16 p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-         
-      </div>
+{% include 'partials/_learn_navbar.html' with username=user.username email=user.email %}
+{% include 'partials/_indicator.html' with app_name=app_name %}
+{% include 'partials/_breadcrumb.html' with app_name=app_name %}
+<div class="p-4 sm:ml-64">
+   <div class="p-4 border-2 dark:text-gray-200 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+      Dashboard
    </div>
+</div>
 {% endblock %}

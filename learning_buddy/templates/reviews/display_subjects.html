@@ -1,0 +1,137 @@
+{% extends "partials/_base.html" %}
+{% load static %}
+{% load compress %}
+
+
+{% block title %}Reviews{% endblock title %}
+
+{% block head %}
+
+{% endblock head %}
+{% block content %}
+{% include 'partials/_learn_navbar.html' with username=user.username email=user.email %}
+{% include 'partials/_indicator.html' with app_name=app_name %}
+
+{% comment %} Breadcrumb {% endcomment %}
+<div class="mt-4 p-4 sm:ml-64">
+    <nav class="flex" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+            <li class="inline-flex items-center">
+                <div href="#"
+                    class="inline-flex items-center text-sm font-medium text-gray-700  dark:text-gray-400 ">
+                    <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
+                    </svg>Reviews
+                </div>
+            </li>
+        </ol>
+    </nav>
+</div>
+
+<div class="mt-4 p-4 sm:ml-64">
+    <div
+        class="p-4 border-2 dark:text-gray-200 border-gray-200 border-dashed rounded-lg dark:border-gray-700 dark:bg-gray- 900">
+        <section class="bg-gray-50 antialiased dark:bg-gray-900">
+            <div class="mx-auto max-w-screen-2xl">
+                <div class="bg-white relative shadow-lg sm:rounded-lg dark:bg-gray-800">
+
+                    <div
+                        class="flex flex-col md:flex-row items-stretch md:items-center md:space-x-3 space-y-3 md:space-y-0 justify-between mx-4 py-4 dark:border-gray-700">
+                        <div class="w-full md:w-1/2">
+                            <form class="flex items-center">
+                                <label for="simple-search" class="sr-only">Search</label>
+                                <div class="relative w-full">
+                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                                            fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
+                                        </svg>
+                                    </div>
+                                    <input type="text" id="simple-search" placeholder="Search for subjects" required
+                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                </div>
+                            </form>
+                        </div>
+                        <div
+                            class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
+                            <button
+                                class="flex items-center justify-center text-white bg-black hover:bg-primary-700 font-medium rounded-lg text-sm px-5 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 gap-2">
+                                Create Subject
+                            </button>
+
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-50 dark:text-gray-200">
+                            <thead
+                                class="text-xs text-gray-700 bg-gray-50 uppercase dark:text-gray-200 dark:bg-gray-700">
+                                <tr class="text-center">
+
+                                    <th scope="col" class="p-4 whitespace-nowrap">Subject</th>
+                                    <th scope="col" class="p-2 whitespace-nowrap">Created on</th>
+                                    <th scope="col" class="p-2 whitespace-nowrap">Updated on</th>
+                                    <th scope="col" class="p-2 whitespace-nowrap">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if subjects %}
+                                {% for subject in subjects %}
+                                <tr
+                                    class=" text-gray-50 shadow-md border-b-2 border-b-gray-800 hover:bg-gray-800 dark:text-gray-200 dark:bg-gray-900">
+                                    <th scope="row" class="p-6 font-medium whitespace-nowrap ">
+                                        <div class="flex items-center justify-center gap-2">
+                                            {{ subject.name }}
+                                        </div>
+                                    </th>
+                                    {% comment %} <td scope="row" class="py-2 px-6 font-medium whitespace-nowrap ">
+                                        <div class="flex items-center justify-center gap-2">
+
+                                        </div>
+                                    </td> {% endcomment %}
+
+                                    <td class="p-6 font-medium whitespace-nowrap">
+                                        <div class="flex items-center justify-center">
+                                            {{ subject.date_time_created }}
+                                        </div>
+                                    </td>
+                                    <td class="p-6 font-medium whitespace-nowrap">
+                                        <div class="flex items-center justify-center">
+                                            {{ subject.date_time_modified }}
+                                        </div>
+                                    </td>
+                                    <td
+                                        class="flex justify-center items-center px-6 py-3 font-medium whitespace-nowrap">
+                                        <div class="flex items-center justify-evenly gap-3 min-w-80 max-w-md">
+
+                                            <button
+                                                class="flex gap-2 items-center text-white-700 hover:text-gray-950 border border-white hover:bg-white focus:ring-4 focus:outline-none focus:ring-white-300 font-medium rounded-lg text-sm px-3 py-2 text-center ">
+                                                <img src="../../assets/img/eye.png" alt="logo" class="w-5 h-5">
+                                                <span>Open</span>
+                                            </button>
+                                            <button type="button"
+                                                class="flex gap-2 items-center text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center ">
+                                                <img src="../../assets/img/edit-icon.png" alt="logo" class="w-5 h-5">
+                                                <span>Edit</span>
+                                            </button>
+                                            <button type="button"
+                                                class="flex gap-2 items-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center ">
+                                                <img src="../../assets/img/delete.png" alt="logo" class="w-5 h-5">
+                                                <span>Delete</span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock content %}
