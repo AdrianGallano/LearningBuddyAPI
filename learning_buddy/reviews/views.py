@@ -1,4 +1,5 @@
 from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponsePermanentRedirect
@@ -18,6 +19,11 @@ class ReviewsSubjectsListView(ListView):
     template_name = "reviews/subjects/display_subjects.html"
     model = Subject
     context_object_name = "subjects"
+    paginate_by = 10
+    
+    
+    def get_queryset(self):
+        return Subject.objects.filter(room=self.request.user.reviews_room).order_by("-date_time_modified")
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -47,5 +53,13 @@ class ReviewsSubjectCreateView(View):
         return HttpResponsePermanentRedirect(redirect_to=reverse("reviews:display_subjects"))
 
 
-class ReviewsSubjectsUpdateView(View):
-    pass
+class ReviewsSubjectEditView(View):
+    def get(self, request, subject_id):
+        subject = Subject.objects.get(id=subject_id)
+        return render(request, "reviews/subjects/edit_subject.html", {"subject":subject})
+
+    def post(self, request, subject_id):
+        subject = Subject.objects.get(id=subject_id)
+        subject.name = request.POST["name"]
+        subject.save()
+        return HttpResponsePermanentRedirect(redirect_to=reverse("reviews:display_subjects"))
