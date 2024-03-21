@@ -8,8 +8,7 @@ CACHE/
 db.sqlite3
 # environments
 .env
-env/
-
+learning_buddy_env/
 # mypy
 .mypy_cache/
 .dmypy.json
