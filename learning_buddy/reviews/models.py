@@ -40,17 +40,16 @@ class Topic(models.Model):
     name = models.CharField(max_length=100)
     date_time_created = models.DateTimeField(auto_now_add=True)
     date_time_modified = models.DateTimeField(auto_now=True)
+    path = models.CharField(max_length=1000)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
 
 
-class Item(models.Model):
-    id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
-    question = models.TextField()
-    answer = models.TextField()
-    topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
+# class Item(models.Model):
+#     id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
+#     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.answer
+#     def __str__(self):
+#         return self.answer

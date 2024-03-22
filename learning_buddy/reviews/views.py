@@ -3,9 +3,9 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponsePermanentRedirect
-from django.views.generic import ListView, DeleteView, View
-from .models import Room, Subject, Category, Topic, Item
-
+from django.views.generic import ListView, View
+from .models import Room, Subject, Category, Topic
+from docx import Document
 
 def create_room(user):
     if user:
@@ -23,7 +23,12 @@ class SubjectListView(ListView):
     
     
     def get_queryset(self):
-        return Subject.objects.filter(room=self.request.user.reviews_room).order_by("-date_time_modified")
+        subject_filter =  self.request.GET.get("filter", False)
+        if(subject_filter):
+            subject = Subject.objects.filter(room=self.request.user.reviews_room ,name__icontains=subject_filter).order_by("-date_time_modified")
+        else:
+            subject = Subject.objects.filter(room=self.request.user.reviews_room).order_by("-date_time_modified")
+        return subject
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -75,8 +80,14 @@ class CategoryListView(ListView):
     def get_queryset(self):
         subject_id= self.kwargs["subject_id"]
         subject = Subject.objects.get(id=subject_id)
-        return Category.objects.filter(subject=subject).order_by("-date_time_modified")
-    
+        category_filter =  self.request.GET.get("filter", False)
+        if(category_filter):
+            category = Category.objects.filter(subject=subject, name__icontains=category_filter).order_by("-date_time_modified")
+        else:
+            category = Category.objects.filter(subject=subject).order_by("-date_time_modified")
+        
+        return category
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         subject_id= self.kwargs["subject_id"]
@@ -135,7 +146,13 @@ class TopicListView(ListView):
     def get_queryset(self):
         category_id= self.kwargs["category_id"]
         category = Category.objects.get(id=category_id)
-        return Topic.objects.filter(category=category).order_by("-date_time_modified")
+
+        topic_filter =  self.request.GET.get("filter", False)
+        if(topic_filter):
+            topic = Topic.objects.filter(category=category, name__icontains=topic_filter).order_by("-date_time_modified")
+        else:
+            topic = Topic.objects.filter(category=category).order_by("-date_time_modified")
+        return topic
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -188,3 +205,15 @@ class TopicEditView(View):
         topic.name = request.POST["name"]
         topic.save()
         return HttpResponsePermanentRedirect(redirect_to=reverse("reviews:display_topics", kwargs={"subject_id":subject_id, "category_id": category_id}))
+    
+
+class TopicView(View):
+    def get(self, request, subject_id, category_id, topic_id):
+        category = Category.objects.get(id=category_id)
+        subject = Subject.objects.get(id=subject_id)
+        topic = Topic.objects.get(id=topic_id)
+
+        document = Document()
+
+        context = {"category":category, "subject": subject, "topic":topic, "document": document}
+        return render(request, "reviews/topics/topic.html", context=context)
