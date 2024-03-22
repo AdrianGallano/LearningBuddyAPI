@@ -35,7 +35,7 @@
                             d="m1 9 4-4-4-4" />
                     </svg>
                     <a href="{% url 'reviews:display_categorys' subject.id %}"
-                        class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">{{ subject.name }} Categories</a>
+                        class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Categories</a>
                 </div>
             </li>
             <li>
@@ -46,7 +46,7 @@
                             d="m1 9 4-4-4-4" />
                     </svg>
                     <a href="{% url 'reviews:display_topics' subject.id category.id %}"
-                        class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">{{category.name}} Topics</a>
+                        class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Topics</a>
                 </div>
             </li>
             <li aria-current="page">
@@ -56,7 +56,7 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="m1 9 4-4-4-4" />
                     </svg>
-                    <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">{{ topic.name }}</span>
+                    <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Reviewer</span>
                 </div>
             </li>
         </ol>
