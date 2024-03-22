@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import SubjectListView, SubjectDeleteView, SubjectCreateView, SubjectEditView, CategoryListView, CategoryCreateView, CategoryDeleteView, CategoryEditView, TopicListView, TopicCreateView, TopicDeleteView, TopicEditView
+from .views import SubjectListView, SubjectDeleteView, SubjectCreateView, SubjectEditView, CategoryListView, CategoryCreateView, CategoryDeleteView, CategoryEditView, TopicListView, TopicCreateView, TopicDeleteView, TopicEditView, TopicView
 app_name = "reviews"
 urlpatterns = [
     path("subject/", SubjectListView.as_view(), name="display_subjects"),
@@ -15,4 +15,5 @@ urlpatterns = [
     path("subject/<uuid:subject_id>/category/<uuid:category_id>/topic/create/", TopicCreateView.as_view(), name="create_topic"),
     path("subject/<uuid:subject_id>/category/<uuid:category_id>/topic/edit/<uuid:topic_id>/", TopicEditView.as_view(), name="edit_topic"),
     path("subject/<uuid:subject_id>/category/<uuid:category_id>/topic/delete/<uuid:topic_id>/", TopicDeleteView.as_view(), name="delete_topic"),
+    path("subject/<uuid:subject_id>/category/<uuid:category_id>/topic/<uuid:topic_id>/", TopicView.as_view(), name="topic"),
 ]
