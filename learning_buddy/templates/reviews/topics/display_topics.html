@@ -166,6 +166,15 @@
                                     </td>
                                 </tr>
                                 {% endfor %}
+                                {% else %}
+                                <tr
+                                class=" text-gray-50 shadow-md border-b-2 border-b-gray-800 dark:text-gray-200 dark:bg-gray-900">
+                                    <th colspan="4" scope="row" class=" p-6 font-medium whitespace-nowrap ">
+                                        <div class="flex items-center justify-center gap-2">
+                                            No {{app_name}} Found.
+                                        </div>
+                                    </th>
+                                </tr>
                                 {% endif %}
                             </tbody>
                         </table>
