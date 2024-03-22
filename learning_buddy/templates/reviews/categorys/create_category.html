@@ -2,9 +2,8 @@
 {% load static %}
 {% load compress %}
 
-{% block title %}
-Reviews | Category
-{% endblock %}
+{% block title %} Reviews | Category {% endblock %}
+
 
 {% block head %}
 
@@ -15,7 +14,7 @@ Reviews | Category
     <div class="relative p-4 w-full max-w-md max-h-full">
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Create New Category</h3>
+                <h3 class="text-center text-lg font-semibold text-gray-900 dark:text-white">Create New Category for {{ subject.name | title}}</h3>
             </div>
             <!-- Modal body -->
             <form class="p-4 md:p-5" action="{% url 'reviews:create_category' subject.id %}" method="post">
