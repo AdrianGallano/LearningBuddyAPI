@@ -6,9 +6,8 @@
 {% block title %} Reviews | Topic{% endblock title %}
 
 {% block head %}
-<link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.3/dist/quill.snow.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.3/dist/quill.js" defer></script>
-<script src="{% static 'reviews/editor/index.js' %}" defer></script>
+<script src="{% static "path/to/tinymce/tinymce.min.js" %}" ></script>
+{{ editor.media }}
 {% endblock head %}
 {% block content %}
 {% include 'partials/_learn_navbar.html' with user=user.username email=user.email %}
@@ -64,12 +63,12 @@
     </nav>
 </div>
 
-<div class="flex flex-col items-center p-4">
-    <div class="w-full md:w-3/4 antialiased mt-4 p-4 sm:ml-64 dark:text-gray-900 aspect-[1/1.41]">
+<div class="flex flex-col items-center p-4 sm:ml-64" >
+    <div class="w-full antialiased dark:text-gray-900 ">
+        {% for field in editor %}
+        {{ field }}
 
-        <div class="dark:bg-white " id="editor">
-            
-        </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock content %}

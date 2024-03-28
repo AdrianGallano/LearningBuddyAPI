@@ -823,6 +823,14 @@ video {
   aspect-ratio: 1/1.41;
 }
 
+.aspect-\[1\/2\] {
+  aspect-ratio: 1/2;
+}
+
+.aspect-\[1\/1\] {
+  aspect-ratio: 1/1;
+}
+
 .h-11 {
   height: 2.75rem;
 }
@@ -865,6 +873,11 @@ video {
 
 .h-screen {
   height: 100vh;
+}
+
+.h-fit {
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .max-h-full {
