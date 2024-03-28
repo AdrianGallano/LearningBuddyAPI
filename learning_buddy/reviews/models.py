@@ -1,6 +1,7 @@
 from django.db import models
 from accounts.models import User
 import uuid
+from tinymce import models as tinymce_models
 
 
 class Room(models.Model):
@@ -40,7 +41,7 @@ class Topic(models.Model):
     name = models.CharField(max_length=100)
     date_time_created = models.DateTimeField(auto_now_add=True)
     date_time_modified = models.DateTimeField(auto_now=True)
-    path = models.CharField(max_length=1000)
+    content = tinymce_models.HTMLField(default="", null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self):
