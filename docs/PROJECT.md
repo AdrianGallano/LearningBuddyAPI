@@ -45,18 +45,27 @@
 </p>
 
 <ul>
-  <li>Reviews</li>
+  <li>Notes</li>
   <ul>
-    <li>Create review</li>
-    <li>Update review</li>
-    <li>Delete review</li>
-    <li>Read review</li>
+    <li>Create notes</li>
+    <li>Update notes</li>
+    <li>Delete notes</li>
+    <li>Read notes</li>
+  </ul>
+</ul>
+<ul>
+  <li>Reviewers</li>
+  <ul>
+    <li>Create reviewers</li>
+    <li>Update reviewers</li>
+    <li>Delete reviewers</li>
+    <li>Read reviewers</li>
   </ul>
 </ul>
 <ul>
   <li>Flashcards</li>
   <ul>
-    <li>AI generated flashcards through review</li>
+    <li>AI generated flashcards through reviewers</li>
     <li>Create flashcards</li>
     <li>Update flashcards</li>
     <li>Delete flashcards</li>
@@ -100,7 +109,7 @@ Bonus feature:
 <ul>
   <li>Automated emailer – Implements space repetition rule</li>
   <ul>
-    <li>Email the user to review every x amount of time</li>
+    <li>Email the user to reviewers every x amount of time</li>
   </ul>
 </ul>
 
